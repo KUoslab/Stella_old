@@ -36,7 +36,7 @@
 
 #define OIOS_HW_QUEUE_MIN (32)   //depth of SFQ(D)
 
-#define NUM_VM 5
+#define NUM_VM 2
 
 #define NUM_METRIC 4
 
@@ -63,14 +63,15 @@ static long oios_reserve[NUM_VM][NUM_METRIC];
 //static int point[2][12] = {{67,78,89,100,114,126,136,149,158,174,185},{91,109,128,147,171,187,208,238,251,274,301}};
 
 #ifdef ON_KVM
-unsigned long partition[5][2] = {{4096, 20975615}, {20977664, 41949183}, {41951232, 62922751}, {62924800, 83896319}, {83898368, 104869887}};
+//unsigned long partition[5][2] = {{4096, 20975615}, {20977664, 41949183}, {41951232, 62922751}, {62924800, 83896319}, {83898368, 104869887}};
+unsigned long partition[5][2] = {{2048, 39065599}, {39065600, 78129151}, {1000100000, 1000200000}, {1000300000, 1000400000}, {1000500000, 1000600000}};
 #else
 unsigned long partition[5][2] = {{2048, 20973567}, {20973568, 41945087}, {41945088, 62916607}, {62918656, 83890175}, {83892224, 104863743}};
 #endif
 
 unsigned long swap_partition[5][2] = {{209733632,  213927935},{213929984,  218124287},{218126336,  222320639},{222322688,  226516991},{226519040,  230713343}};
 
-#define QOS_TEST
+//#define QOS_TEST
 #define QOS_COMPENSATION
 
 #ifdef QOS_TEST
@@ -84,7 +85,7 @@ static int prior[5]={100,100,100,100,100};		//  1 to 1
 //static int prior[5]={100,150,200,250,300};		//  1 to 3
 //static int prior[5]={100,200,300,400,500};		//  1 to 5
 //static int prior[5]={100,300,500,700,900};		//  1 to 9
-static int prior[5]={100, 200, 100, 100, 100};
+static int prior[5]={100, 100, 100, 100, 100};
 //static int prior[5]={100, 100, 100, 100, 100};
 
 #endif
@@ -238,8 +239,8 @@ static void init_requirements(void) {
 //	oios_reserve[0][METRIC_KBYTES] = 200 * KBYTES * OIOS_WINDOW_SIZE_SECOND;
 //	oios_reserve[0][METRIC_KBYTES] = 300 * KBYTES * OIOS_WINDOW_SIZE_SECOND;
 
-	oios_reserve[1][METRIC_KBYTES] = 100 * KBYTES * OIOS_WINDOW_SIZE_SECOND;
-//	oios_reserve[1][METRIC_KBYTES] = 200 * KBYTES * OIOS_WINDOW_SIZE_SECOND;
+//	oios_reserve[1][METRIC_KBYTES] = 100 * KBYTES * OIOS_WINDOW_SIZE_SECOND;
+	oios_reserve[1][METRIC_KBYTES] = 200 * KBYTES * OIOS_WINDOW_SIZE_SECOND;
 //	oios_reserve[1][METRIC_KBYTES] = 300 * KBYTES * OIOS_WINDOW_SIZE_SECOND;
 
 //	oios_limit[0][METRIC_KBYTES] = 100 * KBYTES * OIOS_WINDOW_SIZE_SECOND;
